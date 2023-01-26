@@ -304,7 +304,7 @@ export default function Home(props: {
           supportedFiatShitcoins={supportedFiatShitcoins}
         />
         <div>
-          <a href="https://www.google.com">
+          <a href="https://github.com/shyfire-131/sats2fiat.africa">
             <span className={styles.logo}>
               <Image
                 src="/github.svg"
