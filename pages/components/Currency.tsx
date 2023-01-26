@@ -1,4 +1,4 @@
-import classes from "./Currency.module.css";
+import styles from "./Currency.module.css";
 import CurrencyInput from "react-currency-input-field";
 
 export default function Currency(props: any) {
@@ -14,7 +14,7 @@ export default function Currency(props: any) {
   }
 
   return (
-    <div className={classes.currencyinput}>
+    <div className={styles.currencyinput}>
       {props.enabled && (
         <CurrencyInput
           id={props.id}
