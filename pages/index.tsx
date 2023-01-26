@@ -5,7 +5,7 @@ import Currency from "./components/Currency";
 import PriceData from "./components/PriceData";
 import Head from "next/head";
 
-import usePaxful from "@paxful/sdk-js";
+import paxfulApi from "@paxful/sdk-js";
 
 type UserSettings = {
   zarEnabled: boolean;
@@ -31,11 +31,6 @@ const initUserSettings: UserSettings = {
   zmwEnabled: false,
   usdEnabled: true,
 };
-
-const paxfulApi = usePaxful({
-  clientId: process.env.PAXFUL_CLIENT_ID || "",
-  clientSecret: process.env.PAXFUL_CLIENT_SECRET || "",
-});
 
 const BTC_PER_SAT = 1 / 100000000;
 const formatFiat = (value: number): number => {
@@ -326,7 +321,12 @@ export default function Home(props: {
 }
 
 export async function getStaticProps() {
-  const currencies = await paxfulApi.invoke("/paxful/v1/currency/list");
+  const paxfulApiInstance = paxfulApi({
+    clientId: process.env.PAXFUL_CLIENT_ID || "",
+    clientSecret: process.env.PAXFUL_CLIENT_SECRET || "",
+  });
+
+  const currencies = await paxfulApiInstance.invoke("/paxful/v1/currency/list");
   let tmpExchangeData: any = {};
   currencies.data.currencies.map(
     (element: {
