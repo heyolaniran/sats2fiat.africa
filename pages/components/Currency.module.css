@@ -1,0 +1,82 @@
+.currencyinput div {
+  border-bottom: black 1px solid;
+  margin-top: 1rem;
+  padding: 0.5rem 0 0 0;
+  width: 100%;
+}
+
+.currencyinput input {
+  background: orange;
+  text-align: center;
+  font-size: 1.4rem;
+  border: none;
+  padding-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+
+.currencyinput input:focus {
+  text-align: center;
+  outline: none;
+  font-size: 3rem;
+  /* transition-duration: 150ms; */
+}
+
+.currencyinput label {
+  color: darkslategrey;
+  font-size: 1.5rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 28px;
+  margin: 0rem 0rem 0rem 1rem;
+}
+
+.checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox:checked + .toggleslider {
+  background-color: #ff0000;
+}
+
+.checkbox:focus + .toggleslider {
+  box-shadow: 0 0 1px #ff0000;
+}
+
+.checkbox:checked + .toggleslider:before {
+  /* -webkit-transform: translateX(23px);
+  -ms-transform: translateX(23px); */
+  transform: translateX(23px);
+}
+
+.toggleslider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  /* -webkit-transition: 0.4s; */
+  /* transition: 0.4s; */
+  border-radius: 32px;
+}
+
+.toggleslider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 1px;
+  bottom: 3px;
+  background-color: white;
+  /* -webkit-transition: 0.4s; */
+  /* transition: 0.4s; */
+  border-radius: 50%;
+}
