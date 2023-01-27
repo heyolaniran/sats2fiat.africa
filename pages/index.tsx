@@ -257,7 +257,7 @@ export default function Home(props: {
         />
         <meta
           property="og:image"
-          content="https://sats2fiat.africa/images/21m.png"
+          content="https://sats2fiat.africa/images/card.png"
         />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
