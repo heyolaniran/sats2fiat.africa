@@ -241,7 +241,7 @@ export default function Home(props: {
   return (
     <div className={styles.container}>
       <Head>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,user=scalable=no" />
         <meta charSet="utf-8" />
         <meta
           name="description"
