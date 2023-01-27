@@ -249,20 +249,11 @@ export default function Home(props: {
         />
         <meta property="og:url" content="https://sats2fiat.africa" />
         <meta property="og:title" content="sats2fiat.africa" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="shyfire131" />
-        <meta
-          property="og:description"
-          content="Convert satoshis to bitcoin and fiat currencies"
-        />
-        <meta
-          property="og:image"
-          content="https://sats2fiat.africa/images/card.png"
-        />
-        <meta
-          property="twitter:image"
-          content="https://sats2fiat.africa/images/card.png"
-        />
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@shyfire131">
+        <meta name="twitter:title" content="sats2fiat.africa">
+        <meta name="twitter:description" content="Convert satoshis to bitcoin and fiat 💩coins">
+        <meta name="twitter:image" content="https://sats2fiat.africa/images/card.png">
 
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
