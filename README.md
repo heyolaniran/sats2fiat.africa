@@ -8,9 +8,7 @@ A sats to fiat converter for Africans.
 
 # Development
 
-```
-npm install
-cp env.template env.local
-```
-set env vars accordingly
-`npm run dev`
+- `npm install`
+- `cp env.template env.local`
+- set env vars accordingly
+- `npm run dev`
