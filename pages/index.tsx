@@ -247,6 +247,16 @@ export default function Home(props: {
           name="description"
           content="Convert satoshis to Bitcoin and fiat shitcoins like ZAR, UGX, KES, NGN"
         />
+        <meta property="og:url" content="https://sats2fiat.africa" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="sats2fiat.africa" />
+        <meta name="twitter:card" content="summary" />
+        <meta
+          property="og:description"
+          content="Convert satoshis to bitcoin and fiat currencies"
+        />
+        <meta property="og:image" content="/images/21m.png" />
+
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <main className={styles.main}>
