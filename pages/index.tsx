@@ -259,6 +259,10 @@ export default function Home(props: {
           property="og:image"
           content="https://sats2fiat.africa/images/card.png"
         />
+        <meta
+          property="twitter:image"
+          content="https://sats2fiat.africa/images/card.png"
+        />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
