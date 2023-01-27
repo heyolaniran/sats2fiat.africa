@@ -258,7 +258,7 @@ export default function Home(props: {
         />
         <meta
           name="twitter:image"
-          content="https://sats2fiat.africa/images/card.png"
+          content="https://sats2fiat.africa/images/card_shifted.png"
         />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
