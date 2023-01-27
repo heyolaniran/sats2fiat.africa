@@ -255,7 +255,10 @@ export default function Home(props: {
           property="og:description"
           content="Convert satoshis to bitcoin and fiat currencies"
         />
-        <meta property="og:image" content="/images/21m.png" />
+        <meta
+          property="og:image"
+          content="https://sats2fiat.africa/images/21m.png"
+        />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
