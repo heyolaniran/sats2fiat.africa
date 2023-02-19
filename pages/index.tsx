@@ -297,7 +297,7 @@ export default function Home(props: {
           onValueChanged={valueChangedHandler}
         />
         {/* fiat */}
-        {/* {supportedFiatShitcoins.map((shitCoin) => (
+        {supportedFiatShitcoins.map((shitCoin) => (
           <Currency
             key={shitCoin.id} //required by React
             name={shitCoin.name}
@@ -310,8 +310,8 @@ export default function Home(props: {
             decimalsLimit={4}
             onValueChanged={valueChangedHandler}
           ></Currency>
-        ))} */}
-        Unable to fetch fiat prices right now. Please try again later.
+        ))}
+        {/* Unable to fetch fiat prices right now. Please try again later. */}
       </main>
       <footer className={styles.footer}>
         <PriceData
