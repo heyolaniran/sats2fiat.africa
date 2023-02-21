@@ -356,5 +356,6 @@ export async function getStaticProps() {
   );
   return {
     props: { ...tmpExchangeData },
+    revalidate: 20,
   };
 }
