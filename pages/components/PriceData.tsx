@@ -29,8 +29,8 @@ export default function PriceData(props: any) {
   return (
     <div>
       <div>
-        Prices courtesy of the almighty{" "}
-        <a href="https://paxful.com/">paxful.com</a>
+        Prices courtesy of the brilliant{" "}
+        <a href="https://bitnob.com/">Bitnob</a>
       </div>
       <div>(last fetched {timeAgo.format(bootedAt)})</div>
       <div>
