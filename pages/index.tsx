@@ -5,8 +5,6 @@ import Currency from "./components/Currency";
 import PriceData from "./components/PriceData";
 import Head from "next/head";
 
-import paxfulApi from "@paxful/sdk-js";
-
 type UserSettings = {
   zarEnabled: boolean;
   ugxEnabled: boolean;
@@ -18,6 +16,10 @@ type UserSettings = {
   zmwEnabled: boolean;
   usdEnabled: boolean;
   [key: string]: any; //TS index signature
+};
+
+type ExchangeData = {
+  [key: string]: number;
 };
 
 const initUserSettings: UserSettings = {
@@ -39,12 +41,7 @@ const formatFiat = (value: number): number => {
 
 const USER_SETTINGS_KEY = "USER_SETTINGS";
 
-export default function Home(props: {
-  ZAR: number;
-  USD: number;
-  UGX: number;
-  [key: string]: any;
-}) {
+export default function Home(props: ExchangeData) {
   const [satsValue, setSatsValue] = useState<Number>(1);
   const [btcValue, setBTCValue] = useState<Number>(BTC_PER_SAT);
   const [zarValue, setZARValue] = useState<Number>(
@@ -335,27 +332,18 @@ export default function Home(props: {
   );
 }
 
-export async function getStaticProps() {
-  const paxfulApiInstance = paxfulApi({
-    clientId: process.env.PAXFUL_CLIENT_ID || "",
-    clientSecret: process.env.PAXFUL_CLIENT_SECRET || "",
+export async function getServerSideProps() {
+  let tmpExchangeData: ExchangeData = {};
+  const response = await fetch(
+    "https://sandboxapi.bitnob.co/api/v1/rates/exchange"
+  );
+  const exchangeRates = await response.json();
+
+  exchangeRates.data.map((currency: any) => {
+    tmpExchangeData[currency.code] = currency.rate;
   });
 
-  const currencies = await paxfulApiInstance.invoke("/paxful/v1/currency/list");
-  let tmpExchangeData: any = {};
-  currencies.data.currencies.map(
-    (element: {
-      code: string;
-      name: string;
-      name_localized: string;
-      min_trade_amount_usd: string;
-      rate: { usd: number; btc: number };
-    }) => {
-      tmpExchangeData[element.code] = element.rate.btc;
-    }
-  );
   return {
     props: { ...tmpExchangeData },
-    revalidate: 20,
   };
 }
