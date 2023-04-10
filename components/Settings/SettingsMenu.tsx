@@ -23,7 +23,11 @@ export default function SettingsMenu(props: any) {
         <span />
       </button>
       <nav className={`${styles.nav} ${isOpen ? styles.openNav : ""}`}>
-        <Link href="https://bitcoinekasi.com/" target={"_blank"}>
+        <Link
+          href="https://bitcoinekasi.com/"
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <Image
             src="/images/bitcoinekasi.png"
             width={100}

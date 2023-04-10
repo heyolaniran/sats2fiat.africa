@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Currency from "./components/Currency";
-import PriceData from "./components/PriceData";
+import Currency from "../components/Currency";
+import PriceData from "../components/PriceData";
+import SettingsMenu from "../components/Settings/SettingsMenu";
 import Head from "next/head";
 
 type UserSettings = {
@@ -30,7 +31,7 @@ const initUserSettings: UserSettings = {
   ghsEnabled: true,
   kesEnabled: true,
   mwkEnabled: true,
-  zmwEnabled: false,
+  zmwEnabled: true,
   usdEnabled: true,
 };
 
@@ -215,7 +216,7 @@ export default function Home(props: ExchangeData) {
   };
 
   const toggleChangedHandler = (event: any) => {
-    let settingIndex = event.target.id;
+    let settingIndex = event.id;
     setUserSettings((prevState: UserSettings) => {
       let tmpState: UserSettings = { ...prevState };
       let prevToggle = tmpState[settingIndex];
@@ -237,6 +238,11 @@ export default function Home(props: ExchangeData) {
 
   return (
     <div className={styles.container}>
+      <SettingsMenu
+        state={userSettings}
+        toggleHandler={toggleChangedHandler}
+        fiatShitcoins={supportedFiatShitcoins}
+      />
       <Head>
         <meta name="viewport" content="width=device-width,user=scalable=no" />
         <meta charSet="utf-8" />
@@ -294,20 +300,25 @@ export default function Home(props: ExchangeData) {
           onValueChanged={valueChangedHandler}
         />
         {/* fiat */}
-        {supportedFiatShitcoins.map((shitCoin) => (
-          <Currency
-            key={shitCoin.id} //required by React
-            name={shitCoin.name}
-            id={shitCoin.id}
-            flagIcon={shitCoin.flagIcon}
-            enabled={true}
-            prefix={shitCoin.prefix}
-            amount={shitCoin.stateVar}
-            allowDecimals={true}
-            decimalsLimit={4}
-            onValueChanged={valueChangedHandler}
-          ></Currency>
-        ))}
+        {supportedFiatShitcoins.map((shitCoin) => {
+          let enabledKey = shitCoin.id + "Enabled";
+          if (userSettings[enabledKey]) {
+            return (
+              <Currency
+                key={shitCoin.id} //required by React
+                name={shitCoin.name}
+                id={shitCoin.id}
+                flagIcon={shitCoin.flagIcon}
+                enabled={true}
+                prefix={shitCoin.prefix}
+                amount={shitCoin.stateVar}
+                allowDecimals={true}
+                decimalsLimit={4}
+                onValueChanged={valueChangedHandler}
+              ></Currency>
+            );
+          }
+        })}
         {/* Unable to fetch fiat prices right now. Please try again later. */}
       </main>
       <footer className={styles.footer}>
@@ -316,7 +327,11 @@ export default function Home(props: ExchangeData) {
           supportedFiatShitcoins={supportedFiatShitcoins}
         />
         <div>
-          <a href="https://github.com/shyfire-131/sats2fiat.africa">
+          <a
+            href="https://github.com/shyfire-131/sats2fiat.africa"
+            target={"_blank"}
+            rel="noreferrer"
+          >
             <span className={styles.logo}>
               <Image
                 src="/github.svg"
