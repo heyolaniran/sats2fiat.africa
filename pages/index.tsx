@@ -334,9 +334,7 @@ export default function Home(props: ExchangeData) {
 
 export async function getServerSideProps() {
   let tmpExchangeData: ExchangeData = {};
-  const response = await fetch(
-    "https://sandboxapi.bitnob.co/api/v1/rates/exchange"
-  );
+  const response = await fetch("https://api.bitnob.co/api/v1/rates/exchange");
   const exchangeRates = await response.json();
 
   exchangeRates.data.map((currency: any) => {
