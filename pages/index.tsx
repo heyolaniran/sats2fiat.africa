@@ -76,6 +76,7 @@ export default function Home(props: ExchangeData) {
 
   const [userSettings, setUserSettings] =
     useState<UserSettings>(initUserSettings);
+  const [isLoadingSettings, setIsLoadingSettings] = useState<boolean>(true);
 
   const supportedFiatShitcoins = [
     //TODO: combine id and code
@@ -235,15 +236,18 @@ export default function Home(props: ExchangeData) {
     } else {
       localStorage.setItem(USER_SETTINGS_KEY, JSON.stringify(userSettings));
     }
+    setIsLoadingSettings(false);
   }, []);
 
   return (
     <div className={styles.container}>
-      <SettingsMenu
-        state={userSettings}
-        toggleHandler={toggleChangedHandler}
-        fiatShitcoins={supportedFiatShitcoins}
-      />
+      {!isLoadingSettings && (
+        <SettingsMenu
+          state={userSettings}
+          toggleHandler={toggleChangedHandler}
+          fiatShitcoins={supportedFiatShitcoins}
+        />
+      )}
       <Head>
         <meta name="viewport" content="width=device-width,user=scalable=no" />
         <meta charSet="utf-8" />
