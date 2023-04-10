@@ -5,6 +5,7 @@ import Currency from "../components/Currency";
 import PriceData from "../components/PriceData";
 import SettingsMenu from "../components/Settings/SettingsMenu";
 import Head from "next/head";
+import Link from "next/link";
 
 type UserSettings = {
   zarEnabled: boolean;
@@ -327,7 +328,7 @@ export default function Home(props: ExchangeData) {
           supportedFiatShitcoins={supportedFiatShitcoins}
         />
         <div>
-          <a
+          <Link
             href="https://github.com/shyfire-131/sats2fiat.africa"
             target={"_blank"}
             rel="noreferrer"
@@ -340,7 +341,7 @@ export default function Home(props: ExchangeData) {
                 height={20}
               />
             </span>
-          </a>
+          </Link>
         </div>
       </footer>
     </div>

@@ -1,6 +1,8 @@
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { useState } from "react";
+import Link from "next/link";
+
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo("en-US");
 const bootedAt = Date.now();
@@ -30,7 +32,7 @@ export default function PriceData(props: any) {
     <div>
       <div>
         Prices courtesy of the brilliant{" "}
-        <a href="https://bitnob.com/">Bitnob</a>
+        <Link href="https://bitnob.com/">Bitnob</Link>
       </div>
       <div>(last fetched {timeAgo.format(bootedAt)})</div>
       <div>
