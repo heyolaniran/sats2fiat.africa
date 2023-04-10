@@ -2,8 +2,15 @@ import React, { useState } from "react";
 
 import styles from "./ToggleButton.module.css";
 
-export default function ToggleButton(props: any) {
-  const [isToggled, setIsToggled] = useState(props.initialState);
+interface ToggleProps {
+  id: string;
+  initialState: boolean;
+  label: string;
+  toggleHandler: ({}) => void;
+}
+
+export default function ToggleButton(props: ToggleProps) {
+  const [isToggled, setIsToggled] = useState<boolean>(props.initialState);
 
   const toggle = () => {
     setIsToggled(!isToggled);
