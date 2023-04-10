@@ -32,7 +32,9 @@ export default function PriceData(props: any) {
     <div>
       <div>
         Prices courtesy of the brilliant{" "}
-        <Link href="https://bitnob.com/">Bitnob</Link>
+        <Link href="https://bitnob.com/" target={"_blank"} rel="noreferrer">
+          Bitnob
+        </Link>
       </div>
       <div>(last fetched {timeAgo.format(bootedAt)})</div>
       <div>
