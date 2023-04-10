@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import ToggleButton from "./ToggleButton";
 import styles from "./SettingsMenu.module.css";
 
-export default function SettingsMenu(props: any) {
-  const [isOpen, setIsOpen] = useState(false);
+interface SettingsProps {
+  fiatShitcoins: {
+    name: string;
+    id: string;
+    code: string;
+    flagIcon: string;
+    prefix: string;
+    stateVar: Number;
+    updateFunc: Dispatch<SetStateAction<Number>>;
+  }[];
+  toggleHandler: (event: any) => void;
+  state: { [key: string]: boolean };
+}
+
+export default function SettingsMenu(props: SettingsProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
