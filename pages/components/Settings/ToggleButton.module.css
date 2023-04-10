@@ -1,0 +1,42 @@
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.toggleLabel {
+  color: #fff;
+  font-size: 18px;
+}
+
+.toggleButton {
+  width: 50px;
+  height: 24px;
+  background-color: #ccc;
+  position: relative;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.toggleSwitch {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.toggled .toggleSwitch {
+  transform: translateX(26px);
+}
+
+.toggled {
+  background-color: #4caf50;
+}
