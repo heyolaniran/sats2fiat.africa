@@ -3,19 +3,21 @@ import en from "javascript-time-ago/locale/en";
 import { useState } from "react";
 import Link from "next/link";
 
+import { ExchangeData, FiatShitcoin } from "../types/types";
+
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo("en-US");
 const bootedAt = Date.now();
 
-export default function PriceData(props: any) {
+export default function PriceData(props: ExchangeData) {
   const [showPriceData, setShowPriceData] = useState<boolean>(false);
 
   const revealPriceData = () => {
     setShowPriceData(true);
   };
 
-  const formatPrice = (price: any) => {
-    let newArr = price.supportedFiatShitcoins.map((shitCoin: any) => {
+  const formatPrice = (price: ExchangeData) => {
+    let newArr = price.supportedFiatShitcoins.map((shitCoin: FiatShitcoin) => {
       return (
         "BTC/" +
         shitCoin.code.toUpperCase() +

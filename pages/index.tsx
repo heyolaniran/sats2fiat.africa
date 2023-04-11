@@ -7,7 +7,7 @@ import styles from "../styles/Home.module.css";
 import Currency from "../components/Currency";
 import PriceData from "../components/PriceData";
 import SettingsMenu from "../components/Settings/SettingsMenu";
-import { FiatShitCoin } from "../types/types";
+import { FiatShitcoin, ExchangeData } from "../types/types";
 
 type UserSettings = {
   zarEnabled: boolean;
@@ -20,10 +20,6 @@ type UserSettings = {
   zmwEnabled: boolean;
   usdEnabled: boolean;
   [key: string]: any; //TS index signature
-};
-
-type ExchangeData = {
-  [key: string]: number;
 };
 
 const initUserSettings: UserSettings = {
@@ -80,7 +76,7 @@ export default function Home(props: ExchangeData) {
     useState<UserSettings>(initUserSettings);
   const [isLoadingSettings, setIsLoadingSettings] = useState<boolean>(true);
 
-  const supportedFiatShitcoins: FiatShitCoin[] = [
+  const supportedFiatShitcoins: FiatShitcoin[] = [
     //TODO: combine id and code
     {
       name: "South African Rand",
@@ -360,7 +356,10 @@ export async function getServerSideProps() {
     name: string;
     rate: number;
   }
-  let tmpExchangeData: ExchangeData = {};
+  let tmpExchangeData: ExchangeData = {
+    priceData: {},
+    supportedFiatShitcoins: [],
+  };
   const response = await fetch("https://api.bitnob.co/api/v1/rates/exchange");
   const exchangeRates = await response.json();
 

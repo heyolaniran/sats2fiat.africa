@@ -32,18 +32,6 @@ export default function Currency(props: any) {
       <label htmlFor={props.id}>
         {props.flagIcon} {props.name}
       </label>
-      {/* {!isBTCInput && (
-        <label className={classes.switch}>
-          <input
-            id={props.id + "Enabled"}
-            className={classes.checkbox}
-            type="checkbox"
-            checked={props.enabled}
-            onChange={props.onToggleChanged}
-          />
-          <span className={classes.toggleslider}></span>
-        </label>
-      )} */}
     </div>
   );
 }
