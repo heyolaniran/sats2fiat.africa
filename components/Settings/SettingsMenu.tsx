@@ -4,18 +4,11 @@ import Link from "next/link";
 
 import ToggleButton from "./ToggleButton";
 import styles from "./SettingsMenu.module.css";
+import { ToggleHandler, FiatShitCoin } from "../../types/types";
 
 interface SettingsProps {
-  fiatShitcoins: {
-    name: string;
-    id: string;
-    code: string;
-    flagIcon: string;
-    prefix: string;
-    stateVar: Number;
-    updateFunc: Dispatch<SetStateAction<Number>>;
-  }[];
-  toggleHandler: (event: any) => void;
+  fiatShitcoins: FiatShitCoin[];
+  toggleHandler: ToggleHandler;
   state: { [key: string]: boolean };
 }
 
@@ -50,7 +43,7 @@ export default function SettingsMenu(props: SettingsProps) {
           />
         </Link>
         <div className={styles.toggleButtons}>
-          {props.fiatShitcoins.map((shitcoin: any) => {
+          {props.fiatShitcoins.map((shitcoin: FiatShitCoin) => {
             return (
               <ToggleButton
                 key={shitcoin.id}

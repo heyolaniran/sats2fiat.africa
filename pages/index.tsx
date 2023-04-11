@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Head from "next/head";
+import Link from "next/link";
+
 import styles from "../styles/Home.module.css";
 import Currency from "../components/Currency";
 import PriceData from "../components/PriceData";
 import SettingsMenu from "../components/Settings/SettingsMenu";
-import Head from "next/head";
-import Link from "next/link";
+import { FiatShitCoin } from "../types/types";
 
 type UserSettings = {
   zarEnabled: boolean;
@@ -44,33 +46,33 @@ const formatFiat = (value: number): number => {
 const USER_SETTINGS_KEY = "USER_SETTINGS";
 
 export default function Home(props: ExchangeData) {
-  const [satsValue, setSatsValue] = useState<Number>(1);
-  const [btcValue, setBTCValue] = useState<Number>(BTC_PER_SAT);
-  const [zarValue, setZARValue] = useState<Number>(
+  const [satsValue, setSatsValue] = useState<number>(1);
+  const [btcValue, setBTCValue] = useState<number>(BTC_PER_SAT);
+  const [zarValue, setZARValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZAR)
   ); //South African Rand
-  const [ugxValue, setUGXValue] = useState<Number>(
+  const [ugxValue, setUGXValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.UGX)
   ); //Ugandan Shilling
-  const [ngnValue, setNGNValue] = useState<Number>(
+  const [ngnValue, setNGNValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.NGN)
   ); //Nigerian Naira
-  const [nadValue, setNADValue] = useState<Number>(
+  const [nadValue, setNADValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.NAD)
   ); //Namibian Dollar
-  const [ghsValue, setGHSValue] = useState<Number>(
+  const [ghsValue, setGHSValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.GHS)
   ); //Namibian Dollar
-  const [kesValue, setKESValue] = useState<Number>(
+  const [kesValue, setKESValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.KES)
   ); //Kenyan Shilling
-  const [mwkValue, setMWKValue] = useState<Number>(
+  const [mwkValue, setMWKValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.MWK)
   ); //Kenyan Shilling
-  const [zmwValue, setZMWValue] = useState<Number>(
+  const [zmwValue, setZMWValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZMW)
   ); //Kenyan Shilling
-  const [usdValue, setUSDValue] = useState<Number>(
+  const [usdValue, setUSDValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.USD)
   );
 
@@ -78,7 +80,7 @@ export default function Home(props: ExchangeData) {
     useState<UserSettings>(initUserSettings);
   const [isLoadingSettings, setIsLoadingSettings] = useState<boolean>(true);
 
-  const supportedFiatShitcoins = [
+  const supportedFiatShitcoins: FiatShitCoin[] = [
     //TODO: combine id and code
     {
       name: "South African Rand",
@@ -217,7 +219,7 @@ export default function Home(props: ExchangeData) {
     }
   };
 
-  const toggleChangedHandler = (event: any) => {
+  const toggleChangedHandler = (event: { id: string }) => {
     let settingIndex = event.id;
     setUserSettings((prevState: UserSettings) => {
       let tmpState: UserSettings = { ...prevState };
@@ -353,11 +355,16 @@ export default function Home(props: ExchangeData) {
 }
 
 export async function getServerSideProps() {
+  interface CurrencyApiResponse {
+    code: string;
+    name: string;
+    rate: number;
+  }
   let tmpExchangeData: ExchangeData = {};
   const response = await fetch("https://api.bitnob.co/api/v1/rates/exchange");
   const exchangeRates = await response.json();
 
-  exchangeRates.data.map((currency: any) => {
+  exchangeRates.data.map((currency: CurrencyApiResponse) => {
     tmpExchangeData[currency.code] = currency.rate;
   });
 

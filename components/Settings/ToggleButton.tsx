@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 import styles from "./ToggleButton.module.css";
+import { ToggleHandler } from "../../types/types";
 
 interface ToggleProps {
   id: string;
   initialState: boolean;
   label: string;
-  toggleHandler: ({}) => void;
+  toggleHandler: ToggleHandler;
 }
 
 export default function ToggleButton(props: ToggleProps) {
@@ -17,7 +18,6 @@ export default function ToggleButton(props: ToggleProps) {
     let key = props.id + "Enabled";
     props.toggleHandler({ id: key });
   };
-
   return (
     <div className={styles.toggleWrapper}>
       <label className={styles.toggleLabel}>{props.label}</label>
