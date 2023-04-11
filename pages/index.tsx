@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Currency from "./components/Currency";
-import PriceData from "./components/PriceData";
 import Head from "next/head";
+import Link from "next/link";
+
+import styles from "../styles/Home.module.css";
+import Currency from "../components/Currency";
+import PriceData from "../components/PriceData";
+import SettingsMenu from "../components/Settings/SettingsMenu";
+import { FiatShitcoin, ExchangeData } from "../types/types";
 
 type UserSettings = {
   zarEnabled: boolean;
@@ -18,10 +22,6 @@ type UserSettings = {
   [key: string]: any; //TS index signature
 };
 
-type ExchangeData = {
-  [key: string]: number;
-};
-
 const initUserSettings: UserSettings = {
   zarEnabled: true,
   ugxEnabled: true,
@@ -30,7 +30,7 @@ const initUserSettings: UserSettings = {
   ghsEnabled: true,
   kesEnabled: true,
   mwkEnabled: true,
-  zmwEnabled: false,
+  zmwEnabled: true,
   usdEnabled: true,
 };
 
@@ -42,40 +42,41 @@ const formatFiat = (value: number): number => {
 const USER_SETTINGS_KEY = "USER_SETTINGS";
 
 export default function Home(props: ExchangeData) {
-  const [satsValue, setSatsValue] = useState<Number>(1);
-  const [btcValue, setBTCValue] = useState<Number>(BTC_PER_SAT);
-  const [zarValue, setZARValue] = useState<Number>(
+  const [satsValue, setSatsValue] = useState<number>(1);
+  const [btcValue, setBTCValue] = useState<number>(BTC_PER_SAT);
+  const [zarValue, setZARValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZAR)
   ); //South African Rand
-  const [ugxValue, setUGXValue] = useState<Number>(
+  const [ugxValue, setUGXValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.UGX)
   ); //Ugandan Shilling
-  const [ngnValue, setNGNValue] = useState<Number>(
+  const [ngnValue, setNGNValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.NGN)
   ); //Nigerian Naira
-  const [nadValue, setNADValue] = useState<Number>(
+  const [nadValue, setNADValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.NAD)
   ); //Namibian Dollar
-  const [ghsValue, setGHSValue] = useState<Number>(
+  const [ghsValue, setGHSValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.GHS)
   ); //Namibian Dollar
-  const [kesValue, setKESValue] = useState<Number>(
+  const [kesValue, setKESValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.KES)
   ); //Kenyan Shilling
-  const [mwkValue, setMWKValue] = useState<Number>(
+  const [mwkValue, setMWKValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.MWK)
   ); //Kenyan Shilling
-  const [zmwValue, setZMWValue] = useState<Number>(
+  const [zmwValue, setZMWValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZMW)
   ); //Kenyan Shilling
-  const [usdValue, setUSDValue] = useState<Number>(
+  const [usdValue, setUSDValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.USD)
   );
 
   const [userSettings, setUserSettings] =
     useState<UserSettings>(initUserSettings);
+  const [isLoadingSettings, setIsLoadingSettings] = useState<boolean>(true);
 
-  const supportedFiatShitcoins = [
+  const supportedFiatShitcoins: FiatShitcoin[] = [
     //TODO: combine id and code
     {
       name: "South African Rand",
@@ -214,8 +215,8 @@ export default function Home(props: ExchangeData) {
     }
   };
 
-  const toggleChangedHandler = (event: any) => {
-    let settingIndex = event.target.id;
+  const toggleChangedHandler = (event: { id: string }) => {
+    let settingIndex = event.id;
     setUserSettings((prevState: UserSettings) => {
       let tmpState: UserSettings = { ...prevState };
       let prevToggle = tmpState[settingIndex];
@@ -233,10 +234,18 @@ export default function Home(props: ExchangeData) {
     } else {
       localStorage.setItem(USER_SETTINGS_KEY, JSON.stringify(userSettings));
     }
+    setIsLoadingSettings(false);
   }, []);
 
   return (
     <div className={styles.container}>
+      {!isLoadingSettings && (
+        <SettingsMenu
+          state={userSettings}
+          toggleHandler={toggleChangedHandler}
+          fiatShitcoins={supportedFiatShitcoins}
+        />
+      )}
       <Head>
         <meta name="viewport" content="width=device-width,user=scalable=no" />
         <meta charSet="utf-8" />
@@ -294,20 +303,25 @@ export default function Home(props: ExchangeData) {
           onValueChanged={valueChangedHandler}
         />
         {/* fiat */}
-        {supportedFiatShitcoins.map((shitCoin) => (
-          <Currency
-            key={shitCoin.id} //required by React
-            name={shitCoin.name}
-            id={shitCoin.id}
-            flagIcon={shitCoin.flagIcon}
-            enabled={true}
-            prefix={shitCoin.prefix}
-            amount={shitCoin.stateVar}
-            allowDecimals={true}
-            decimalsLimit={4}
-            onValueChanged={valueChangedHandler}
-          ></Currency>
-        ))}
+        {supportedFiatShitcoins.map((shitCoin) => {
+          let enabledKey = shitCoin.id + "Enabled";
+          if (userSettings[enabledKey]) {
+            return (
+              <Currency
+                key={shitCoin.id} //required by React
+                name={shitCoin.name}
+                id={shitCoin.id}
+                flagIcon={shitCoin.flagIcon}
+                enabled={true}
+                prefix={shitCoin.prefix}
+                amount={shitCoin.stateVar}
+                allowDecimals={true}
+                decimalsLimit={4}
+                onValueChanged={valueChangedHandler}
+              ></Currency>
+            );
+          }
+        })}
         {/* Unable to fetch fiat prices right now. Please try again later. */}
       </main>
       <footer className={styles.footer}>
@@ -316,7 +330,11 @@ export default function Home(props: ExchangeData) {
           supportedFiatShitcoins={supportedFiatShitcoins}
         />
         <div>
-          <a href="https://github.com/shyfire-131/sats2fiat.africa">
+          <Link
+            href="https://github.com/shyfire-131/sats2fiat.africa"
+            target={"_blank"}
+            rel="noreferrer"
+          >
             <span className={styles.logo}>
               <Image
                 src="/github.svg"
@@ -325,7 +343,7 @@ export default function Home(props: ExchangeData) {
                 height={20}
               />
             </span>
-          </a>
+          </Link>
         </div>
       </footer>
     </div>
@@ -333,11 +351,19 @@ export default function Home(props: ExchangeData) {
 }
 
 export async function getServerSideProps() {
-  let tmpExchangeData: ExchangeData = {};
+  interface CurrencyApiResponse {
+    code: string;
+    name: string;
+    rate: number;
+  }
+  let tmpExchangeData: ExchangeData = {
+    priceData: {},
+    supportedFiatShitcoins: [],
+  };
   const response = await fetch("https://api.bitnob.co/api/v1/rates/exchange");
   const exchangeRates = await response.json();
 
-  exchangeRates.data.map((currency: any) => {
+  exchangeRates.data.map((currency: CurrencyApiResponse) => {
     tmpExchangeData[currency.code] = currency.rate;
   });
 

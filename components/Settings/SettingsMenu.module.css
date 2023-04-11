@@ -1,0 +1,122 @@
+.settingsMenu {
+  position: relative;
+}
+
+.settings {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.settings span {
+  width: 100%;
+  height: 3px;
+  background: #333;
+}
+
+.settings.isOpen span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.settings.isOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.settings.isOpen span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: -270px;
+  width: 270px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #333;
+  z-index: 50;
+  transition: left 0.3s;
+}
+
+.openNav {
+  left: 0;
+}
+
+.nav img {
+  display: block;
+  width: 50%;
+  max-width: 100px;
+  margin: -40px auto 50px;
+}
+
+.toggleButtons {
+  margin-top: 0px;
+  padding: 0 20px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .nav {
+    padding-top: 30px;
+  }
+
+  .settings span {
+    width: 250%;
+  }
+
+  .settings.isOpen span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg); /* Adjust the translateY value for mobile */
+  }
+
+  .settings.isOpen span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg); /* Adjust the translateY value for mobile */
+  }
+}
+
+/* Medium mobile screens */
+@media (min-width: 376px) and (max-width: 390px) {
+  .nav {
+    padding-top: 0px;
+  }
+  .settings span {
+    width: 100%;
+  }
+
+  .settings.isOpen span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .settings.isOpen span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 375px) {
+  .nav {
+    padding-top: 20px;
+  }
+
+  .settings span {
+    width: 100%; /* Adjust the width for the smallest screens */
+  }
+
+  .settings.isOpen span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg); /* Adjust the translateY value for small screens */
+  }
+
+  .settings.isOpen span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg); /* Adjust the translateY value for small screens */
+  }
+}
