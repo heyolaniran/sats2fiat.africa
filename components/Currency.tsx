@@ -29,9 +29,18 @@ export default function Currency(props: any) {
         ></CurrencyInput>
       )}
       <br />
-      <label htmlFor={props.id}>
-        {props.flagIcon} {props.name}
-      </label>
+      {props.flagIcon.length <= 4 && (
+        <label htmlFor={props.id}>
+          {props.flagIcon} {props.name}
+        </label>
+      )}
+      {props.flagIcon.length > 4 && (
+        <>
+          <label htmlFor={props.id}>{props.flagIcon}</label>
+          <br />
+          <label htmlFor={props.id}>{props.name}</label>
+        </>
+      )}
     </div>
   );
 }

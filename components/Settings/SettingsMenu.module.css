@@ -41,6 +41,8 @@
   left: -270px;
   width: 270px;
   height: 100%;
+  /* overflow-y: scroll; */
+  /* -webkit-overflow-scrolling: touch; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +59,7 @@
   display: block;
   width: 50%;
   max-width: 100px;
-  margin: -40px auto 50px;
+  margin: 0px auto 50px;
 }
 
 .toggleButtons {
@@ -68,7 +70,7 @@
 /* Mobile-specific styles */
 @media (max-width: 768px) {
   .nav {
-    padding-top: 30px;
+    padding-top: 0px;
   }
 
   .settings span {
@@ -85,9 +87,9 @@
 }
 
 /* Medium mobile screens */
-@media (min-width: 376px) and (max-width: 390px) {
+@media (min-width: 376px) and (max-width: 414px) {
   .nav {
-    padding-top: 0px;
+    padding-top: 25px;
   }
   .settings span {
     width: 100%;
@@ -105,7 +107,11 @@
 /* Smaller mobile screens */
 @media (max-width: 375px) {
   .nav {
-    padding-top: 20px;
+    padding-top: 0px;
+  }
+
+  .nav img {
+    margin: 30px auto 20px;
   }
 
   .settings span {
