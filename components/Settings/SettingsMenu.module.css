@@ -67,8 +67,8 @@
   padding: 0 20px;
 }
 
-/* Mobile-specific styles */
-@media (max-width: 768px) {
+/* Mobile-specific styles - large screens */
+@media (min-width: 415px) and (max-width: 828px) {
   .nav {
     padding-top: 0px;
   }
@@ -92,7 +92,7 @@
     padding-top: 25px;
   }
   .settings span {
-    width: 100%;
+    width: 250%;
   }
 
   .settings.isOpen span:nth-child(1) {
