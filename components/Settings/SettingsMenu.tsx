@@ -6,6 +6,8 @@ import ToggleButton from "./ToggleButton";
 import styles from "./SettingsMenu.module.css";
 import { ToggleHandler, FiatShitcoin } from "../../types/types";
 
+import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
+
 interface SettingsProps {
   fiatShitcoins: FiatShitcoin[];
   toggleHandler: ToggleHandler;
@@ -21,13 +23,8 @@ export default function SettingsMenu(props: SettingsProps) {
 
   return (
     <div className={styles.settingsMenu}>
-      <button
-        className={`${styles.settings} ${isOpen ? styles.isOpen : ""}`}
-        onClick={toggleMenu}
-      >
-        <span />
-        <span />
-        <span />
+      <button className={`${styles.settings}`} onClick={toggleMenu}>
+        {isOpen ? <GiCancel size='calc(20px + 1vw)' color="000" /> : <GiHamburgerMenu size='calc(20px + 1vw)' color="000" />}
       </button>
       <nav className={`${styles.nav} ${isOpen ? styles.openNav : ""}`}>
         <Link

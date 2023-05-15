@@ -18,6 +18,9 @@ type UserSettings = {
   kesEnabled: boolean;
   mwkEnabled: boolean;
   zmwEnabled: boolean;
+  xofEnabled: boolean;
+  xafEnabled: boolean;
+  zwlEnabled: boolean;
   usdEnabled: boolean;
   [key: string]: any; //TS index signature
 };
@@ -31,6 +34,9 @@ const initUserSettings: UserSettings = {
   kesEnabled: true,
   mwkEnabled: true,
   zmwEnabled: true,
+  xofEnabled: true,
+  xafEnabled: true,
+  zwlEnabled: true,
   usdEnabled: true,
 };
 
@@ -68,6 +74,15 @@ export default function Home(props: ExchangeData) {
   const [zmwValue, setZMWValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZMW)
   ); //Kenyan Shilling
+  const [xofValue, setXOFValue] = useState<number>(
+    formatFiat(BTC_PER_SAT * props.XOF)
+  );
+  const [xafValue, setXAFValue] = useState<number>(
+    formatFiat(BTC_PER_SAT * props.XAF)
+  );
+  const [zwlValue, setZWLValue] = useState<number>(
+    formatFiat(BTC_PER_SAT * props.ZWL)
+  );
   const [usdValue, setUSDValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.USD)
   );
@@ -79,40 +94,13 @@ export default function Home(props: ExchangeData) {
   const supportedFiatShitcoins: FiatShitcoin[] = [
     //TODO: combine id and code
     {
-      name: "South African Rand",
-      id: "zar",
-      code: "ZAR",
-      flagIcon: "🇿🇦",
-      prefix: "R ",
-      stateVar: zarValue,
-      updateFunc: setZARValue,
-    },
-    {
-      name: "Ugandan Shilling",
-      id: "ugx",
-      code: "UGX",
-      flagIcon: "🇺🇬",
-      prefix: "UGX ",
-      stateVar: ugxValue,
-      updateFunc: setUGXValue,
-    },
-    {
-      name: "Nigerian Naira",
-      id: "ngn",
-      code: "NGN",
-      flagIcon: "🇳🇬",
-      prefix: "₦ ",
-      stateVar: ngnValue,
-      updateFunc: setNGNValue,
-    },
-    {
-      name: "Namibian Dollar",
-      id: "nad",
-      code: "NAD",
-      flagIcon: "🇳🇦",
-      prefix: "N$ ",
-      stateVar: nadValue,
-      updateFunc: setNADValue,
+      name: "Central African CFA",
+      id: "xaf",
+      code: "XAF",
+      flagIcon: "🇨🇲 🇨🇫 🇹🇩 🇬🇶 🇬🇦 🇨🇬",
+      prefix: "F.CFA ",
+      stateVar: xafValue,
+      updateFunc: setXAFValue,
     },
     {
       name: "Ghana Cedi",
@@ -142,6 +130,51 @@ export default function Home(props: ExchangeData) {
       updateFunc: setMWKValue,
     },
     {
+      name: "Namibian Dollar",
+      id: "nad",
+      code: "NAD",
+      flagIcon: "🇳🇦",
+      prefix: "N$ ",
+      stateVar: nadValue,
+      updateFunc: setNADValue,
+    },
+    {
+      name: "Nigerian Naira",
+      id: "ngn",
+      code: "NGN",
+      flagIcon: "🇳🇬",
+      prefix: "₦ ",
+      stateVar: ngnValue,
+      updateFunc: setNGNValue,
+    },
+    {
+      name: "South African Rand",
+      id: "zar",
+      code: "ZAR",
+      flagIcon: "🇿🇦",
+      prefix: "R ",
+      stateVar: zarValue,
+      updateFunc: setZARValue,
+    },
+    {
+      name: "Ugandan Shilling",
+      id: "ugx",
+      code: "UGX",
+      flagIcon: "🇺🇬",
+      prefix: "UGX ",
+      stateVar: ugxValue,
+      updateFunc: setUGXValue,
+    },
+    {
+      name: "West African CFA",
+      id: "xof",
+      code: "XOF",
+      flagIcon: "🇧🇯 🇧🇫 🇨🇮 🇲🇱 🇳🇪 🇸🇳 🇹🇬",
+      prefix: "F.CFA ",
+      stateVar: xofValue,
+      updateFunc: setXOFValue,
+    },
+    {
       name: "Zambian Kwacha",
       id: "zmw",
       code: "ZMW",
@@ -149,6 +182,15 @@ export default function Home(props: ExchangeData) {
       prefix: "ZK ",
       stateVar: zmwValue,
       updateFunc: setZMWValue,
+    },
+    {
+      name: "Zimbabwean Dollar",
+      id: "zwl",
+      code: "ZWL",
+      flagIcon: "🇿🇼",
+      prefix: "$ ",
+      stateVar: zwlValue,
+      updateFunc: setZWLValue,
     },
     {
       name: "US Dollar",
@@ -247,7 +289,7 @@ export default function Home(props: ExchangeData) {
         />
       )}
       <Head>
-        <meta name="viewport" content="width=device-width,user=scalable=no" />
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user=scalable=no" />
         <meta charSet="utf-8" />
         <meta
           name="description"
@@ -268,6 +310,13 @@ export default function Home(props: ExchangeData) {
         />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="apple-mobile-web-app-title" content="Sats2Fiat"/>
+
       </Head>
       <main className={styles.main}>
         <header className={styles.header}>
