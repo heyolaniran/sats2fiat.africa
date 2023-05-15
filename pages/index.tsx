@@ -310,6 +310,12 @@ export default function Home(props: ExchangeData) {
         />
 
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="apple-mobile-web-app-title" content="Sats2Fiat"/>
+
       </Head>
       <main className={styles.main}>
         <header className={styles.header}>
