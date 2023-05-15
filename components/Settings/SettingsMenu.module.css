@@ -4,36 +4,17 @@
 
 .settings {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: calc(3px + 2vw);
+  top: calc(3px + 2vw);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 30px;
-  height: 20px;
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 100;
 }
 
-.settings span {
-  width: 100%;
-  height: 3px;
-  background: #333;
-}
-
-.settings.isOpen span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.settings.isOpen span:nth-child(2) {
-  opacity: 0;
-}
-
-.settings.isOpen span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
 
 .nav {
   position: fixed;
@@ -41,7 +22,7 @@
   left: -270px;
   width: 270px;
   height: 100%;
-  /* overflow-y: scroll; */
+  overflow-y: auto;
   /* -webkit-overflow-scrolling: touch; */
   display: flex;
   flex-direction: column;
@@ -72,35 +53,12 @@
   .nav {
     padding-top: 0px;
   }
-
-  .settings span {
-    width: 250%;
-  }
-
-  .settings.isOpen span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg); /* Adjust the translateY value for mobile */
-  }
-
-  .settings.isOpen span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg); /* Adjust the translateY value for mobile */
-  }
 }
 
 /* Medium mobile screens */
 @media (min-width: 376px) and (max-width: 414px) {
   .nav {
     padding-top: 25px;
-  }
-  .settings span {
-    width: 250%;
-  }
-
-  .settings.isOpen span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  .settings.isOpen span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
   }
 }
 
@@ -114,15 +72,4 @@
     margin: 30px auto 20px;
   }
 
-  .settings span {
-    width: 100%; /* Adjust the width for the smallest screens */
-  }
-
-  .settings.isOpen span:nth-child(1) {
-    transform: translateY(6px) rotate(45deg); /* Adjust the translateY value for small screens */
-  }
-
-  .settings.isOpen span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg); /* Adjust the translateY value for small screens */
-  }
 }
