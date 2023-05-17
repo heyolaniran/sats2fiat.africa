@@ -70,10 +70,13 @@ export default function Home(props: ExchangeData) {
   ); //Kenyan Shilling
   const [mwkValue, setMWKValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.MWK)
-  ); //Kenyan Shilling
+  ); //Malawian Kwacha
+  const [tzsValue, setTZSValue] = useState<number>(
+    formatFiat(BTC_PER_SAT * props.TZS)
+  ); //Tanzanian Shilling
   const [zmwValue, setZMWValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.ZMW)
-  ); //Kenyan Shilling
+  ); //Zambian Kwacha
   const [xofValue, setXOFValue] = useState<number>(
     formatFiat(BTC_PER_SAT * props.XOF)
   );
@@ -155,6 +158,15 @@ export default function Home(props: ExchangeData) {
       prefix: "R ",
       stateVar: zarValue,
       updateFunc: setZARValue,
+    },
+    {
+      name: "Tanzanian Shilling",
+      id: "tzs",
+      code: "TZS",
+      flagIcon: "🇹🇿",
+      prefix: "TSh ",
+      stateVar: tzsValue,
+      updateFunc: setTZSValue,
     },
     {
       name: "Ugandan Shilling",
