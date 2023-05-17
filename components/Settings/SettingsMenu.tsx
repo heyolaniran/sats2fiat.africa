@@ -28,7 +28,7 @@ export default function SettingsMenu(props: SettingsProps) {
       </button>
       <nav className={`${styles.nav} ${isOpen ? styles.openNav : ""}`}>
         <Link
-          href="https://bitcoinekasi.com/"
+          href="https://bitcoinekasi.com/?ref=sats2fiat"
           target={"_blank"}
           rel="noreferrer"
         >
