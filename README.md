@@ -8,8 +8,12 @@ Run your own instance on Vercel by clicking the shiny Deploy button below.
 
 # Roadmap:
 
+- Faster load times
+  - Cache prices
+  - Loading indicator
 - "copy value to clipboard" buttons
 - Historical price data
+- ~Customize currencies~
 
 # Development
 
